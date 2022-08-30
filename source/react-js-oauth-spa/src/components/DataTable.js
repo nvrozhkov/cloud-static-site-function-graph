@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { TokenContext } from '../hooks/useOAuth';
+import { SettingsContext, TokenContext } from '../hooks/useOAuth';
 import { NewItem } from './NewItem';
 
 export const DataTable = () => {
+    const settings = useContext(SettingsContext);
     const [accessToken] = useContext(TokenContext);
 
     const [isLoading, setIsLoading] = useState(true);
@@ -10,11 +11,26 @@ export const DataTable = () => {
 
     useEffect(() => {
         fetchData();
-    }, [accessToken])
+    }, [accessToken]);
+
+    function wait(delay){
+        return new Promise((resolve) => setTimeout(resolve, delay));
+    }
+
+    function fetchRetry(url, fetchOptions, tries = 5, delay = 500) {
+        function onError(err){
+            let triesLeft = tries - 1;
+            if(!triesLeft){
+                throw err;
+            }
+            return wait(delay).then(() => fetchRetry(url, delay, triesLeft, fetchOptions));
+        }
+        return fetch(url,fetchOptions).catch(onError);
+    }
 
     const fetchData = async () => {
         if (accessToken) {
-            const response = await fetch("https://678f07a5979b4737bccb457bfe020a23.apig.ru-moscow-1.hc.sbercloud.ru/pets",
+            const response = await fetchRetry(settings.api_url,
                 {
                     headers: {
                         "X-Access-Token": accessToken
@@ -27,7 +43,7 @@ export const DataTable = () => {
     }
 
     const deleteItem = async (id) => {
-        const response = await fetch(`https://678f07a5979b4737bccb457bfe020a23.apig.ru-moscow-1.hc.sbercloud.ru/pets/${id}`, {
+        const response = await fetch(`${settings.api_url}/${id}`, {
             method: "DELETE",
             headers: {
                 "X-Access-Token": accessToken
@@ -62,13 +78,13 @@ export const DataTable = () => {
             data.length > 0 && <table className="table">
                 <thead>
                     <tr>
-                        {Object.keys(data[0]).map(key => (<th scope="col" key={key}>{key}</th>))}
+                        {Object.keys(data[0]).filter(key => key !== "id").map(key => (<th scope="col" key={key}>{key}</th>))}
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map(item => (<tr key={item.id}>
-                        {Object.keys(data[0]).map(key => (<td key={key}>{item[key]}</td>))}
+                        {Object.keys(data[0]).filter(key => key !== "id").map(key => (<td key={key}>{item[key]}</td>))}
                         <td><button className='btn btn-outline-danger btn-sm' onClick={() => deleteItem(item.id)}><i className="bi bi-trash3"></i></button></td>
                     </tr>))}
                 </tbody>

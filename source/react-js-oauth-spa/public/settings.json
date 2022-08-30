@@ -1,0 +1,11 @@
+{
+    "api_url": "https://678f07a5979b4737bccb457bfe020a23.apig.ru-moscow-1.hc.sbercloud.ru/pets",
+    "oauth_endpoint": "https://esc-adfs.sb-cloud.ru/adfs/oauth2/authorize", 
+    "client_id": "6b59f990-dbfe-4ce5-b560-aa7bf87a7a80", 
+    "response_type": "id_token+token", 
+    "scope": "openid profile access_api", 
+    "response_mode": "fragment", 
+    "nonce": "ABCDEFHIJK", 
+    "redirect_url": "https://demo-static-site-api.obs-website.ru-moscow-1.hc.sbercloud.ru",
+    "resource": "http://localhost:4000"
+}

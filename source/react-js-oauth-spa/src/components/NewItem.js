@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react'
-import { TokenContext } from '../hooks/useOAuth';
+import { TokenContext, SettingsContext } from '../hooks/useOAuth';
 
 export const NewItem = props => {
+    const settings = useContext(SettingsContext);
     const { onItemAdded } = props;
     const [accessToken] = useContext(TokenContext);
     const [itemName, setItemName] = useState("");
@@ -10,7 +11,7 @@ export const NewItem = props => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("https://678f07a5979b4737bccb457bfe020a23.apig.ru-moscow-1.hc.sbercloud.ru/pets", {
+        const response = await fetch(settings.api_url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'appication/json',

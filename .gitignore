@@ -1,5 +1,5 @@
 /react-js-oauth-spa/build
 /react-js-oauth-spa/node_modules
-/functions/**/node_modules
+**/**/node_modules
 test.http
 **/**/*.zip

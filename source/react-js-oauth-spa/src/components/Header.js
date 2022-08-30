@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { TokenContext } from '../hooks/useOAuth';
 
 export const Header = () => {
-    const [accessToken, idToken] = useContext(TokenContext);
+    const [, idToken] = useContext(TokenContext);
 
     const parseJwt = (token) => {
         var base64Url = token.split('.')[1];
@@ -23,7 +23,7 @@ export const Header = () => {
                 </a>
                 
                 <div style={{ color: "white" }}>
-                    Hello, {userName}!
+                    {userName}
                 </div>
             </div>
         </nav>
