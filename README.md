@@ -1,1 +1,1 @@
-# cloud-static-site-function-graph
+# Лабораторная работа - использование бессерверных технологий в облаке Advanced
