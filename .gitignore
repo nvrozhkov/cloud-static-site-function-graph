@@ -1,3 +1,4 @@
 source/react-js-oauth-spa/node_modules
+source/react-js-spa/node_modules
 test.http
 **/**/*.zip
