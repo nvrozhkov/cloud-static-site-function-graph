@@ -40,4 +40,4 @@
 ![](images/das-5.png)
 
 ## SQL запрос для создания таблицы
-Готовый запрос для создания таблицы можно найти тут.
+Готовый запрос для создания таблицы можно найти [тут](https://github.com/zzindexx/cloud-static-site-function-graph/blob/main/source/database/create_table.sql).
