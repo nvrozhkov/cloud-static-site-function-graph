@@ -14,7 +14,15 @@ export const Header = () => {
         return JSON.parse(jsonPayload);
     };
 
-    const userName = idToken ? parseJwt(idToken).upn : "";
+    let userName = "";
+
+    if (idToken) {
+        const parsedToken = parseJwt(idToken);
+        if (parsedToken.preferred_username) userName = parsedToken.preferred_username;
+        if (parsedToken.email) userName = parsedToken.email;
+        if (parsedToken.name) userName = parsedToken.name;
+    }
+
     return (
         <nav className="navbar navbar-dark bg-dark navbar-expand-lg mb-2" style={{ backgroundColor: "#e3f2fd" }}>
             <div className='container'>

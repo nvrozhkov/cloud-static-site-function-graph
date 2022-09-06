@@ -10,10 +10,8 @@ function App() {
     "client_id": "", 
     "response_type": "", 
     "scope": "", 
-    "response_mode": "", 
     "nonce": "", 
-    "redirect_url": "",
-    "resource": ""
+    "redirect_url": ""
   });
 
   useEffect(() => {
@@ -27,10 +25,8 @@ function App() {
     settings.client_id,
     settings.response_type,
     settings.scope,
-    settings.response_mode,
     settings.nonce,
-    settings.redirect_url,
-    settings.resource,
+    settings.redirect_url
   );
 
   return (

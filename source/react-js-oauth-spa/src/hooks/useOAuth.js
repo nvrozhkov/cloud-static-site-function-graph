@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const useOAuth = (oauth_endpoint, client_id, response_type, scope, response_mode, nonce, redirect_url, resource, access_token_name = 'access_token', id_token_name = 'id_token') => {
+export const useOAuth = (oauth_endpoint, client_id, response_type, scope, nonce, redirect_url, access_token_name = 'access_token', id_token_name = 'id_token') => {
 
     const [accessToken, setAccessToken] = useState("");
     const [idToken, setIdToken] = useState("");
@@ -33,11 +33,11 @@ export const useOAuth = (oauth_endpoint, client_id, response_type, scope, respon
                     }
                 }
                 //redirect for authentication
-                window.location.href = `${oauth_endpoint}?client_id=${client_id}&response_type=${response_type}&scope=${scope}&response_mode=${response_mode}&nonce=${nonce}&redirect_uri=${redirect_url}&resource=${resource}`;
+                window.location.href = `${oauth_endpoint}?response_type=${response_type}&scope=${scope}&client_id=${client_id}&redirect_uri=${encodeURI(redirect_url)}&nonce=${nonce}`;
             }
         }
         
-    }, [oauth_endpoint, client_id, response_type, scope, response_mode, nonce, redirect_url, resource, access_token_name, id_token_name]);
+    }, [oauth_endpoint, client_id, response_type, scope, nonce, redirect_url, access_token_name, id_token_name]);
 
     const getToken = (name) => {
         const accesstoken = sessionStorage.getItem(name);
