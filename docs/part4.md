@@ -57,3 +57,21 @@
 Описанную выше операцию необходимо повторить для всех 3х созданных функций, не забывая выбирать правильный метод для каждой функции.
 По итогу мы получаем все 3 функции, доступные по одному адресу, но по разным путям.
  
+Кроме того, необходимо сделать 2 дополнительных API, которые не будут связаны с функциями - они будут вызываться браузером для Preflight запроса.
+
+1. Первый API:
+   * Protocol - HTTPS
+   * Путь - /pets
+   * Метод - OPTIONS
+   * Security Authentication - None
+   * CORS - Enabled
+   * Backend Type - Mock
+
+1. Второй API:
+   * Protocol - HTTPS
+   * Путь - /pets/{id}
+   * Input parameters - id (по аналогии с DELETE)
+   * Метод - OPTIONS
+   * Security Authentication - None
+   * CORS - Enabled
+   * Backend Type - Mock
